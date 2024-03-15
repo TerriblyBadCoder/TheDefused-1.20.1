@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "A": {
+      "item": "thedefused:charged_ash"
+    },
+    "S": {
+      "item": "minecraft:sand"
+    }
+  },
+  "pattern": [
+    "AS",
+    "SA"
+  ],
+  "result": {
+    "item": "thedefused:ash_cube"
+  },
+  "show_notification": true
+}

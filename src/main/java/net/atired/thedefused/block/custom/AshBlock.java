@@ -11,6 +11,8 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
@@ -25,7 +27,8 @@ public class AshBlock extends Block {
         super(pProperties);
     }
     public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
-        if (!pLevel.isClientSide() && (!pPlayer.isCreative()) ) {
+        System.out.println(pPlayer.getMainHandItem().getEnchantmentLevel(Enchantments.SILK_TOUCH));
+        if ((!pPlayer.isCreative() && pPlayer.getMainHandItem().getEnchantmentLevel(Enchantments.SILK_TOUCH) == 0) ) {
             this.onCaughtFire(pState, pLevel, pPos, (Direction)null, (LivingEntity)null);
             System.out.println(pPlayer.getMainHandItem().getEnchantmentTags());
         }
@@ -42,6 +45,7 @@ public class AshBlock extends Block {
         explode(pLevel,pPos);
         super.stepOn(pLevel, pPos, pState, pEntity);
     }
+    
 
     @Override
     public void wasExploded(Level pLevel, BlockPos pPos, Explosion pExplosion) {

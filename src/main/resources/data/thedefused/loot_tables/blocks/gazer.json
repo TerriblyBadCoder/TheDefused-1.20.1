@@ -11,12 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "thedefused:chiseled_dark_prismarine"
-
+          "name": "thedefused:gazer"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "thedefused:blocks/chiseled_dark_prismarine"
+  "random_sequence": "thedefused:blocks/gazer"
 }
