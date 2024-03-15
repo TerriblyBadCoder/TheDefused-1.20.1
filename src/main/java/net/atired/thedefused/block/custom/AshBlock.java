@@ -27,10 +27,10 @@ public class AshBlock extends Block {
         super(pProperties);
     }
     public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
-        System.out.println(pPlayer.getMainHandItem().getEnchantmentLevel(Enchantments.SILK_TOUCH));
+
         if ((!pPlayer.isCreative() && pPlayer.getMainHandItem().getEnchantmentLevel(Enchantments.SILK_TOUCH) == 0) ) {
             this.onCaughtFire(pState, pLevel, pPos, (Direction)null, (LivingEntity)null);
-            System.out.println(pPlayer.getMainHandItem().getEnchantmentTags());
+
         }
 
         super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
@@ -45,7 +45,7 @@ public class AshBlock extends Block {
         explode(pLevel,pPos);
         super.stepOn(pLevel, pPos, pState, pEntity);
     }
-    
+
 
     @Override
     public void wasExploded(Level pLevel, BlockPos pPos, Explosion pExplosion) {
@@ -59,12 +59,12 @@ public class AshBlock extends Block {
     {
         if(!pLevel.isClientSide())
         {
-            System.out.println("Eh, ha, heh");
+
             ExplosionDamageCalculator explosionDamageCalculator = new ExplosionDamageCalculator();
 
 
             pLevel.explode(null,pLevel.damageSources().lightningBolt(),explosionDamageCalculator,pPos.getCenter().x,pPos.getCenter().y,pPos.getCenter().z,
-                    (float)1.1,false, Level.ExplosionInteraction.TNT);
+                    (float)1.2,false, Level.ExplosionInteraction.TNT);
         }
     }
 }

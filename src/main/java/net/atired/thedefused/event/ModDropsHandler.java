@@ -96,7 +96,7 @@ public class ModDropsHandler {
 
                 }
                 nextWorld.getChunk(pos);    // make sure the chunk is loaded
-                System.out.println(" \r\n " + nextPlayer.getRespawnPosition() + " \r\n ");
+
                 Set<RelativeMovement> relativeMovements = new Set<RelativeMovement>() {
                     @Override
                     public int size() {
@@ -166,7 +166,7 @@ public class ModDropsHandler {
 
                     }
                 };
-                System.out.println("eh");
+
                 for (Object a : player.getActiveEffects().toArray())
                 {
                     if(!((MobEffectInstance)a).getEffect().isBeneficial())
@@ -174,7 +174,7 @@ public class ModDropsHandler {
                         player.removeEffect(((MobEffectInstance)a).getEffect());
                     }
                  }
-                System.out.println("he");
+
                 player.teleportTo(nextWorld, pos.getX(), pos.getY(),pos.getZ(),relativeMovements,0,0);
                 player.randomTeleport(player.getRandomX(10),player.getRandomY(),player.getRandomZ(10), true);
             }
@@ -191,7 +191,7 @@ public class ModDropsHandler {
             if(event.getEntity().getTags().contains("defused_thedefused_mod"))
             {
                 event.setCanceled(true);
-                System.out.println("TEST");
+
             }
         }
         @SubscribeEvent

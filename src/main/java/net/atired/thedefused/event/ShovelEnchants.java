@@ -15,7 +15,7 @@ public class ShovelEnchants {
     @SubscribeEvent
     public void Highland(LivingDamageEvent event)
     {
-        System.out.println(event.getEntity().level());
+
         if (event.getSource().getDirectEntity() != null)
             if(event.getSource().getDirectEntity() instanceof Player)
             {
@@ -31,7 +31,7 @@ public class ShovelEnchants {
                     event.setAmount(event.getAmount()+((fall*enchantmentLevel)/2));
                     if(fall > (float)0.5 & !faller.level().isClientSide())
                     {
-                        System.out.println(event.getAmount()+((fall*enchantmentLevel)/1.5) + " " + event.getEntity().level());
+
 
 
                         ServerLevel serverLevel= (ServerLevel)faller.level();

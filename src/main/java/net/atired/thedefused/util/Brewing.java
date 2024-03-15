@@ -15,7 +15,7 @@ public class Brewing implements IBrewingRecipe {
     private final Potion output;
 
     public Brewing(Potion input, Item ingredient, Potion output) {
-        System.out.println(" heh "+" heh ");
+
         this.input = input;
         this.ingredient = ingredient;
         this.output = output;

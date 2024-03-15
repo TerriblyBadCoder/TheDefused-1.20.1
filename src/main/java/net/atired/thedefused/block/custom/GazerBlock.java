@@ -61,7 +61,7 @@ public class GazerBlock extends DirectionalBlock {
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         if (pState.getValue(FACING) == pFacing) {
-            System.out.println("The shape was updated");
+
             this.startSignal(pLevel, pCurrentPos);
         }
 
