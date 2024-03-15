@@ -69,6 +69,12 @@ public class DefusedMod
     BrewingRecipeRegistry.addRecipe(new Brewing(Potions.POISON,Moditems.COOKEDSHULKERMEAT.get(), Modpotions.TOXIC.get()));
         BrewingRecipeRegistry.addRecipe(new Brewing(Potions.THICK,Moditems.GUARDIANEYE.get(), Modpotions.MINING_FATIGUE.get()));
         BrewingRecipeRegistry.addRecipe(new Brewing(Modpotions.MINING_FATIGUE.get(),Items.FERMENTED_SPIDER_EYE, Modpotions.HASTE.get()));
+        BrewingRecipeRegistry.addRecipe(new Brewing(Modpotions.HASTE.get(),Items.REDSTONE, Modpotions.LONGHASTE.get()));
+        BrewingRecipeRegistry.addRecipe(new Brewing(Modpotions.MINING_FATIGUE.get(),Items.REDSTONE, Modpotions.LONGMINING_FATIGUE.get()));
+        BrewingRecipeRegistry.addRecipe(new Brewing(Modpotions.TOXIC.get(),Items.REDSTONE, Modpotions.LONGTOXIC.get()));
+        BrewingRecipeRegistry.addRecipe(new Brewing(Modpotions.TOXIC.get(),Items.GLOWSTONE, Modpotions.STRONGTOXIC.get()));
+        BrewingRecipeRegistry.addRecipe(new Brewing(Potions.LONG_POISON,Moditems.COOKEDSHULKERMEAT.get(), Modpotions.LONGTOXIC.get()));
+        BrewingRecipeRegistry.addRecipe(new Brewing(Potions.STRONG_POISON,Moditems.COOKEDSHULKERMEAT.get(), Modpotions.STRONGTOXIC.get()));
     }
 
     // Add the example block item to the building blocks tab
