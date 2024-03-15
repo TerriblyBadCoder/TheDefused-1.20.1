@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smoking",
+  "category": "misc",
+  "cookingtime": 50,
+  "experience": 0.8,
+
+  "ingredient": {
+    "item": "thedefused:shulker_meat"
+  },
+
+  "result": {
+
+    "item": "thedefused:cooked_shulker_meat"
+  }
+
+}

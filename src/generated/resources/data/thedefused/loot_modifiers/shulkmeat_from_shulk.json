@@ -1,0 +1,35 @@
+{
+  "type": "thedefused:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/shulker"
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "flags": {
+          "is_on_fire": true
+        }
+      }
+    },
+    {
+      "chance": 100.0,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "function": "minecraft:furnace_smelt",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/shulker"
+    },
+
+    {
+      "chance": 100.0,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "thedefused:shulker_meat"
+}

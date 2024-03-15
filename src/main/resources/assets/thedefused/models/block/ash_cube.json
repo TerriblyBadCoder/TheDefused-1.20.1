@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "thedefused:block/charged_cube_bottom",
+    "side": "thedefused:block/charged_cube_side",
+
+    "front": "thedefused:block/charged_cube_side",
+    "top": "thedefused:block/charged_cube_top"
+  }
+}

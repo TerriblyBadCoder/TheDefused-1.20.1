@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 50,
+  "experience": 0.7,
+  "group": "prismarine_shard",
+  "ingredient": {
+    "item": "thedefused:guardianeye"
+  },
+
+  "result": {
+    "count": 2,
+    "item": "minecraft:prismarine_shard"
+  }
+
+}

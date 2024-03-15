@@ -1,0 +1,4 @@
+// 1.20.1	2024-03-05T11:27:22.5728162	Global Loot Modifiers : thedefused
+448fb32c46458f79cf155da9a188ddcf0575099c data/forge/loot_modifiers/global_loot_modifiers.json
+8439c444f90874e76a5738e9098cb7a4efc63dc3 data/thedefused/loot_modifiers/guardianeye_from_guardian.json
+87353434ce3631802d8b9aadc076e30d68567132 data/thedefused/loot_modifiers/shulkmeat_from_shulk.json

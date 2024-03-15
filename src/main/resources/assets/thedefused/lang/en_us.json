@@ -1,0 +1,21 @@
+{
+  "item.thedefused.cooked_shulker_meat": "Burnt Shulk",
+  "item.thedefused.shulker_meat": "Shulk",
+  "item.thedefused.warped_effigy": "Warped Effigy",
+  "item.thedefused.perfume": "Perfume",
+  "item.thedefused.charged_ash": "Charged Ashes",
+  "item.thedefused.guardianeye": "Guardian Eye",
+  "item.minecraft.potion.effect.mining_fatigue": "Potion of Depths",
+  "item.minecraft.splash_potion.effect.mining_fatigue": "Splash Potion of Depths",
+  "item.minecraft.potion.effect.haste": "Potion of Haste",
+  "item.minecraft.splash_potion.effect.toxic": "Splash Potion of Toxicity",
+  "item.minecraft.potion.effect.toxic": "Potion of Toxicity",
+  "item.minecraft.splash_potion.effect.haste": "Splash Potion of Haste",
+  "item.minecraft.lingering_potion.effect.haste": "Lingering Potion of Haste",
+  "item.minecraft.lingering_potion.effect.mining_fatigue": "Lingering Potion of Depths",
+  "effect.thedefused.toxic": "Toxic",
+  "block.thedefused.chiseled_dark_prismarine": "Chiseled Dark Prismarine",
+  "block.thedefused.gazer": "Gazer",
+  "block.thedefused.ash_cube": "Charged Ash Cube",
+  "enchantment.thedefused.highlander": "Highlander"
+}

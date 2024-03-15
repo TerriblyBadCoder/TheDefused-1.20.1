@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.8,
+
+  "ingredient": {
+    "item": "thedefused:shulker_meat"
+  },
+
+  "result": {
+
+    "item": "thedefused:cooked_shulker_meat"
+  }
+
+}

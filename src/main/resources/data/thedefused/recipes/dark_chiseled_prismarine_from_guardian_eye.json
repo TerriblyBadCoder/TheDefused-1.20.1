@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+
+  "key": {
+    "I": {
+      "item": "thedefused:guardianeye"
+    },
+    "i": {
+      "item": "minecraft:dark_prismarine"
+    }
+  },
+  "pattern": [
+    "iii",
+    "iIi",
+    "iii"
+  ],
+  "result": {
+    "count": 8,
+    "item": "thedefused:chiseled_dark_prismarine"
+  }
+}

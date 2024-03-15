@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "thedefused:block/chiseled_dark_prismarine_side",
+    "side": "thedefused:block/chiseled_dark_prismarine_side",
+    "front": "thedefused:block/chiseled_dark_prismarine_side",
+    "top": "thedefused:block/chiseled_dark_prismarine_side"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "thedefused:block/gazer",
+  "textures": {
+    "bottom": "thedefused:block/gazer_back_on",
+    "front": "thedefused:block/gazer_front_on"
+  }
+}
