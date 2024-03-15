@@ -20,19 +20,21 @@ public class ToxicHudOverlay {
             int y = height;
 
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, (float) (((float) ModDropsHandler.health/(float) ModDropsHandler.maxhealth)/4+0.75));
+            RenderSystem.setShaderGlintAlpha(0.5);
             RenderSystem.setShaderTexture(0, TOXIC_HEART_EMPTY);
+            int off = (ModDropsHandler.maxhealth-10);
+            for (int i = 0; i < (ModDropsHandler.health); i++) {
 
-            for (int i = 0; i < ModDropsHandler.health; i++) {
-                int eh = (int)(Math.random()*3 - 1.5);
-                guiGraphics.blit(TOXIC_HEART_FULL, x - 91 + (i * 8), y - 39, 0, 0, 9, 9,
+                guiGraphics.blit(TOXIC_HEART_FULL, x - 91 + (i * 8) - off*4, y - 39, 0, 0, 9, 9,
                         9, 9);
             }
-            for (int i = 0; i <(10- ModDropsHandler.health); i++) {
+            for (int i = 0; i < ((ModDropsHandler.maxhealth-ModDropsHandler.health)); i++) {
 
-                guiGraphics.blit(TOXIC_HEART_EMPTY, x - 91 + ((ModDropsHandler.health + i) * 8), y - 39, 0, 0, 9, 9,
+                guiGraphics.blit(TOXIC_HEART_EMPTY, x - 91 + ((ModDropsHandler.health + i) * 8) - off*4, y - 39, 0, 0, 9, 9,
                         9, 9);
             }
+
         }
 
     });

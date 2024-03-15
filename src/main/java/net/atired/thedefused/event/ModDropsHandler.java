@@ -53,6 +53,7 @@ import java.util.Set;
 public class ModDropsHandler {
         public static boolean oxygen = false;
         public static int health = 0;
+        public static int maxhealth = 0;
         public boolean hasToxic = false;
         public static boolean hasToxicity = false;
         public static boolean isCreative = false;
@@ -242,6 +243,7 @@ public class ModDropsHandler {
             ModDropsHandler.isCreative = event.player.isCreative();
             hasToxic = event.player.hasEffect(ModEffects.TOXIC.get());
             ModDropsHandler.hasToxicity = hasToxic;
+            ModDropsHandler.maxhealth = Math.round(event.player.getMaxHealth()/2);
 
         }
         @SubscribeEvent
