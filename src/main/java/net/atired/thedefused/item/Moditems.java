@@ -1,7 +1,9 @@
 package net.atired.thedefused.item;
 
 import net.atired.thedefused.DefusedMod;
+import net.atired.thedefused.item.custom.BejeveledApple;
 import net.atired.thedefused.item.custom.ChargedAsh;
+import net.atired.thedefused.item.custom.EnchantedBejeveledApple;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,6 +16,10 @@ public class Moditems {
             ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, DefusedMod.MODID);
     public  static final RegistryObject<Item>
             CHARGEDASH = ITEMS.register("charged_ash",()->new ChargedAsh(new Item.Properties()));
+    public  static final RegistryObject<Item>
+            ENCHANTEDBEJEVELEDFRUIT = ITEMS.register("enchanted_bejeveled_fruit",()->new EnchantedBejeveledApple(new Item.Properties().food(Modfoods.BEJEVELEDAPPLE).rarity(Rarity.EPIC)));
+    public  static final RegistryObject<Item>
+            BEJEVELEDFRUIT = ITEMS.register("bejeveled_fruit",()->new BejeveledApple(new Item.Properties().food(Modfoods.BEJEVELEDAPPLE).rarity(Rarity.RARE)));
     public  static final RegistryObject<Item>
             PERFUME = ITEMS.register("perfume",()->new Item(new Item.Properties().stacksTo(16)));
     public  static final RegistryObject<Item>

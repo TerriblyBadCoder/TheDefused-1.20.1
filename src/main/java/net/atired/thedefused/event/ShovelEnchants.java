@@ -19,8 +19,6 @@ public class ShovelEnchants {
         if (event.getSource().getDirectEntity() != null)
             if(event.getSource().getDirectEntity() instanceof Player)
             {
-
-
                 Player faller = (Player) event.getSource().getDirectEntity();
                 int enchantmentLevel = faller.getMainHandItem().getEnchantmentLevel(ModEnchantments.HIGHLANDER.get());
                 float fall = faller.fallDistance;
@@ -31,9 +29,6 @@ public class ShovelEnchants {
                     event.setAmount(event.getAmount()+((fall*enchantmentLevel)/2));
                     if(fall > (float)0.5 & !faller.level().isClientSide())
                     {
-
-
-
                         ServerLevel serverLevel= (ServerLevel)faller.level();
                         serverLevel.sendParticles(ParticleTypes.FLASH,living.getX(),living.getY()+1,living.getZ(),1,0,0,0,0);
                     }

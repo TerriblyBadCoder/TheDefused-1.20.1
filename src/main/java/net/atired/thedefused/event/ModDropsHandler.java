@@ -220,6 +220,13 @@ public class ModDropsHandler {
                     else if (ItemGotten == Items.HONEY_BOTTLE) {
                         ItemGotten = Moditems.PERFUME.get();
                     }
+                    else if (ItemGotten == Items.GOLDEN_APPLE) {
+                        ItemGotten = Moditems.BEJEVELEDFRUIT.get();
+                    }
+                    else if (ItemGotten == Items.ENCHANTED_GOLDEN_APPLE) {
+                        ItemGotten = Moditems.ENCHANTEDBEJEVELEDFRUIT.get();
+                    }
+
 
 
                     ItemEntity eheh = new ItemEntity(event.getLevel(), EventEntity.getX(),-50,EventEntity.getZ(),

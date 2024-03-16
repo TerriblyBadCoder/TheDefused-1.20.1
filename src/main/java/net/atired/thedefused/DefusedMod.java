@@ -100,10 +100,17 @@ public class DefusedMod
         {
             event.accept(ModBlocks.GAZER);
         }
+        if(event.getTabKey()==CreativeModeTabs.FOOD_AND_DRINKS)
+        {
+            event.accept(Moditems.BEJEVELEDFRUIT);
+            event.accept(Moditems.ENCHANTEDBEJEVELEDFRUIT);
+            event.accept(Moditems.SHULKERMEAT);
+        }
         if(event.getTabKey() == CreativeModeTabs.COMBAT)
         {
             event.accept(ModBlocks.ASH_CUBE);
             event.accept(Moditems.WARPEDEFFIGY);
+
         }
         if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES)
         {
