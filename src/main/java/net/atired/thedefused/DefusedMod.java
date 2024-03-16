@@ -5,12 +5,10 @@ import net.atired.thedefused.block.ModBlocks;
 import net.atired.thedefused.effect.ModEffects;
 
 import net.atired.thedefused.enchantment.ModEnchantments;
-import net.atired.thedefused.event.ClientEvents;
-import net.atired.thedefused.event.CreeperLobotomyEvent;
-import net.atired.thedefused.event.ShovelEnchants;
+import net.atired.thedefused.event.*;
 import net.atired.thedefused.event.loot.ModLootModifier;
-import net.atired.thedefused.event.ModDropsHandler;
 import net.atired.thedefused.item.Moditems;
+import net.atired.thedefused.particle.ModParticles;
 import net.atired.thedefused.potion.Modpotions;
 import net.atired.thedefused.util.Brewing;
 import net.minecraft.client.Minecraft;
@@ -53,11 +51,13 @@ public class DefusedMod
         ModLootModifier.register(modEventBus);
         ModEffects.register(modEventBus);
         ModEnchantments.register(modEventBus);
+        ModParticles.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ModDropsHandler());
         MinecraftForge.EVENT_BUS.register(new ClientEvents());
         MinecraftForge.EVENT_BUS.register(new CreeperLobotomyEvent());
         MinecraftForge.EVENT_BUS.register(new ShovelEnchants());
+        MinecraftForge.EVENT_BUS.register(new ModEventBusEvents());
         modEventBus.addListener(this::addCreative);
 
 

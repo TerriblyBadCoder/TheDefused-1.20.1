@@ -17,6 +17,9 @@ public class ModEnchantments {
     public static RegistryObject<Enchantment> HIGHLANDER = ENCHANTMENTS.register("highlander",
             () -> new HighlanderEnchantment(Enchantment.Rarity.UNCOMMON,
                     SHOVEL, EquipmentSlot.MAINHAND));
+    public static RegistryObject<Enchantment> COMBUST = ENCHANTMENTS.register("combustible",
+            () -> new CombustibleEnchant(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentCategory.TRIDENT, EquipmentSlot.MAINHAND));
     public static void register(IEventBus eventBus)
     {
         ENCHANTMENTS.register(eventBus);
