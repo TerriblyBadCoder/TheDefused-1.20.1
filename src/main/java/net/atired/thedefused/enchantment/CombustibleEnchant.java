@@ -21,7 +21,7 @@ public class CombustibleEnchant extends Enchantment {
     }
     @Override
     public int getMinCost(int pEnchantmentLevel) {
-        return 10 + 20 * (pEnchantmentLevel - 1);
+        return 40 + 20 * (pEnchantmentLevel - 1);
     }
     @Override
     public int getMaxCost(int pEnchantmentLevel) {
@@ -33,8 +33,4 @@ public class CombustibleEnchant extends Enchantment {
         return !(pEnch instanceof TridentLoyaltyEnchantment);
     }
 
-    @Override
-    public int getMaxLevel() {
-        return 1;
-    }
 }

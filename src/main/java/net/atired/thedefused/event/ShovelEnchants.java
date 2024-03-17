@@ -114,6 +114,10 @@ public class ShovelEnchants {
         }
     }
     @SubscribeEvent
+    public void combustfy(LivingEntityUseItemEvent event) {
+        System.out.println(event.getItem().getUseDuration());
+    }
+    @SubscribeEvent
     public void combustfly(LivingEntityUseItemEvent.Stop event)
     {
 

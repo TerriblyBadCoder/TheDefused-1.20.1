@@ -62,7 +62,7 @@ minecraft {
         // applies to all the run configs below
         configureEach {
             workingDirectory project.file('run')
-
+            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'mixins.thedefused.json'
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
             // "SCAN": For mods scan.
@@ -168,6 +168,10 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Title'    : project.name,
                 'Implementation-Version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors,
+                "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+                "MixinConfigs": "mixins.thedefused.json", // Конфигурации миксинов, через зяпятую если их несколько
+                "FMLCorePluginContainsFMLMod": "true",  // Не забываем указать эти два флага,
+                "ForceLoadAsMod": "true",               // чтобы Forge нормально загрузил и мод, и миксины
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
