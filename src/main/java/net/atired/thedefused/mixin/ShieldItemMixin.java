@@ -60,8 +60,6 @@ public class ShieldItemMixin {
                         livingEntity.hurt(pLevel.damageSources().playerAttack(pPlayer),1*Elevel + 1);
                         livingEntity.setDeltaMovement(vec3.multiply(0.7 + Elevel*0.1,2,0.7  + Elevel*0.1).add(0,0.2  + Elevel*0.05,0));
                     }
-
-
                     Vec3 entiPos = livingEntity.getPosition(0).add(0,1.5,0);
                     if(pLevel.isClientSide())
                     {
