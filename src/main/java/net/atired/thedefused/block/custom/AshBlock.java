@@ -2,12 +2,20 @@ package net.atired.thedefused.block.custom;
 
 import net.atired.thedefused.item.Moditems;
 import net.atired.thedefused.particle.ModParticles;
+import net.atired.thedefused.particle.custom.VolatileParticle;
+import net.minecraft.client.particle.GlowParticle;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -37,19 +45,15 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
 public class AshBlock extends Block {
     public static final IntegerProperty CHARGE;
     public AshBlock(Properties pProperties) {
         super(pProperties);
     }
     public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
-
         if ((!pPlayer.isCreative() && pPlayer.getMainHandItem().getEnchantmentLevel(Enchantments.SILK_TOUCH) == 0) ) {
             this.onCaughtFire(pState, pLevel, pPos, (Direction)null, (LivingEntity)null);
-
         }
-
         super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
     @Override
@@ -58,24 +62,17 @@ public class AshBlock extends Block {
     }
     @Override
     public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-
         explode(pLevel,pPos,this.getCharge(pState));
         super.stepOn(pLevel, pPos, pState, pEntity);
     }
-
-
     @Override
     public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
-
-
             if (!level.isClientSide & explosion.getPosition() != pos.getCenter()) {
                 explode(level,pos,this.getCharge(state));
-                System.out.println("what");
-            }
 
+            }
         super.onBlockExploded(state, level, pos, explosion);
     }
-
     public void explode(Level pLevel, BlockPos pPos, int i)
     {
         if(!pLevel.isClientSide())
@@ -86,12 +83,16 @@ public class AshBlock extends Block {
                     1.25F + ((float)i)/10,false, Level.ExplosionInteraction.TNT);
             Vec3 center = pPos.getCenter();
             if (pLevel instanceof ServerLevel serverLevel) {
-                ParticleOptions uhh = ParticleTypes.FLAME;
-
-                serverLevel.sendParticles(ModParticles.VOLATILE_PARTICLES.get(),center.x,center.y,center.z,1,0,0,0,0);
+                for(int j = 0; j < i/3+1; j++)
+                    serverLevel.sendParticles(ModParticles.VOLATILE_PARTICLES.get(),center.x+randumb(i),center.y+randumb(i),center.z+randumb(i),1,0,0,0,0);
             }
 
         }
+    }
+    protected float randumb(int inty)
+    {
+        float floaty = inty/4.0F*(float)Math.random()-inty/8.0F;
+        return floaty;
     }
     @Override
     public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
@@ -118,6 +119,7 @@ public class AshBlock extends Block {
         if(this.getCharge(pState) > 0)
         {
             for(int i = 0; i <this.getCharge(pState)/4+1; i++)
+
                 pLevel.addParticle(ParticleTypes.ELECTRIC_SPARK, pPos.getX() + Math.random()*1.2, pPos.getY() + Math.random()*1.2, pPos.getZ() + Math.random()*1.2, 0.0, 0.0, 0.0);
         }
 

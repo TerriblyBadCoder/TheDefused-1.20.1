@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "thedefused:block/cold_shale",
+    "side": "thedefused:block/cold_shale",
+    "front": "thedefused:block/cold_shale",
+    "top": "thedefused:block/cold_shale"
+  }
+}

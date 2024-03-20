@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:has_structure/bastion_remnant",
+  "features": "thedefused:shale_placed",
+  "step": "underground_decoration"
+}

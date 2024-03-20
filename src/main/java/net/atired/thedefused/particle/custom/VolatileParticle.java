@@ -91,15 +91,16 @@ public class VolatileParticle extends TextureSheetParticle {
 
     public void tick() {
         this.setSpriteFromAge(this.sprite);
-        if(this.age/this.lifetime < 0.75)
-            this.quadSize += 0.2F;
-        else
-            this.quadSize -= 0.3;
+        if(this.age/this.lifetime < 0.5)
+            this.quadSize += this.lifetime/(this.age+0.5F)/40.0F;
+
         if (this.delay > 0) {
             --this.delay;
         } else {
             super.tick();
         }
+        this.gCol -= this.age/50.0F;
+        this.bCol -= this.age/50.0F;
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -9,6 +9,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = DefusedMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -22,5 +23,7 @@ public class DataGenerators {
 
 
         generator.addProvider(event.includeServer(), new ModGlobalLootModifiersProvider(packOutput));
+        generator.addProvider(event.includeServer(),new ModWorldGenProvider(packOutput,lookupProvider));
+
     }
 }
