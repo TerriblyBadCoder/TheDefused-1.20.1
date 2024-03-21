@@ -29,9 +29,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> CHISELED_DARK_PRISMARINE = registerBlock("chiseled_dark_prismarine",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.DARK_PRISMARINE)));
     public static final RegistryObject<Block> COLD_SHALE = registerBlock("cold_shale",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)));
+            () -> new ShaleBlock(ModBlocks.SHALE,true, BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)));
     public static final RegistryObject<Block> SHALE = registerBlock("shale",
-            () -> new ShaleBlock(ModBlocks.COLD_SHALE.get(), BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)));
+            () -> new ShaleBlock(ModBlocks.COLD_SHALE,false, BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)));
 
 
 
