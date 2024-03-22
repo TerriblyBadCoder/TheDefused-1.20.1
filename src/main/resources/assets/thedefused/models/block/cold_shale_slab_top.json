@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "thedefused:block/cold_shale",
+    "side": "thedefused:block/cold_shale",
+    "top": "thedefused:block/cold_shale"
+  }
+}

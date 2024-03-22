@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "thedefused:block/cold_shale_slab"
+    },
+    "type=double": {
+      "model": "thedefused:block/cold_shale"
+    },
+    "type=top": {
+      "model": "thedefused:block/cold_shale_slab_top"
+    }
+  }
+}

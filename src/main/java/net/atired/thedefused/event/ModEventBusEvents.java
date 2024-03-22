@@ -4,6 +4,7 @@ import net.atired.thedefused.DefusedMod;
 import net.atired.thedefused.particle.ModParticles;
 import net.atired.thedefused.particle.custom.BashParticles;
 import net.atired.thedefused.particle.custom.CombustionParticles;
+import net.atired.thedefused.particle.custom.ShaleParticles;
 import net.atired.thedefused.particle.custom.VolatileParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
@@ -18,9 +19,10 @@ import net.minecraftforge.fml.common.Mod;
 public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerParticleFactories(final RegisterParticleProvidersEvent event){
-        System.out.println("Yooo");
+        event.registerSpriteSet(ModParticles.SHALE_PARTICLES.get(), ShaleParticles.Provider::new);
         event.registerSpriteSet(ModParticles.COMBUSTION_PARTICLES.get(), CombustionParticles.Provider::new);
         event.registerSpriteSet(ModParticles.BASH_PARTICLES.get(), BashParticles.Provider::new);
         event.registerSpriteSet(ModParticles.VOLATILE_PARTICLES.get(), VolatileParticle.Provider::new);
+
     }
 }

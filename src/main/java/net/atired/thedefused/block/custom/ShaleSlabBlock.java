@@ -1,9 +1,5 @@
 package net.atired.thedefused.block.custom;
-import java.util.Optional;
-import java.util.function.Supplier;
-import com.google.common.base.Suppliers;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
+
 import net.atired.thedefused.block.ModBlocks;
 import net.atired.thedefused.particle.ModParticles;
 import net.minecraft.core.BlockPos;
@@ -18,52 +14,46 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.Supplier;
-
-public class ShaleBlock extends Block {
-
+public class ShaleSlabBlock extends SlabBlock {
     private final RegistryObject coldShale;
     private final boolean isCold;
-
-    public ShaleBlock(RegistryObject pBlock,boolean pCold, Properties pProperties) {
+    public ShaleSlabBlock(RegistryObject pBlock, boolean pCold, Properties pProperties) {
         super(pProperties);
         this.coldShale = pBlock;
         this.isCold = pCold;
     }
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        if (this.scanForWater(pLevel, pPos) & this.coldShale != null) {
-            pLevel.setBlock(pPos, ((Block)this.coldShale.get()).defaultBlockState(), 2);
-            pLevel.sendParticles(ParticleTypes.SMOKE,pPos.getCenter().x + Math.random()-0.5,pPos.getCenter().y + Math.random()-0.5,pPos.getCenter().z + Math.random()-0.5,10,0,0,0,0.1);
-
-        }
-
-    }
-    @Override
     public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
+
         if (this.scanForWater(pLevel, pPos)) {
             pLevel.scheduleTick(pPos, this, 10 + pLevel.getRandom().nextInt(5));
         }
+
     }
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-        if(pLevel.isClientSide & !this.isCold & !pLevel.getBlockTicks().hasScheduledTick(pPos,pLevel.getBlockState(pPos).getBlock()))
+        if(!this.isCold & !pLevel.getBlockTicks().hasScheduledTick(pPos,pLevel.getBlockState(pPos).getBlock()))
         {
-
             Vec3 vecPos = pPos.getCenter();
             pLevel.addParticle(ModParticles.SHALE_PARTICLES.get(),vecPos.x+(Math.random()-0.5)*1.4F,vecPos.y+Math.random()-0.5,vecPos.z+(Math.random()-0.5)*1.4F,0,0.2,0);
         }
+    }
+    @Override
+    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
+        if (this.scanForWater(pLevel, pPos) & this.coldShale != null) {
+            pLevel.setBlock(pPos, ((Block)this.coldShale.get()).withPropertiesOf(pState), 2);
+            pLevel.sendParticles(ParticleTypes.SMOKE,pPos.getCenter().x + Math.random()-0.5,pPos.getCenter().y + Math.random()-0.5,pPos.getCenter().z + Math.random()-0.5,10,0,0,0,0.1);
 
+        }
 
     }
     @Override
@@ -85,12 +75,13 @@ public class ShaleBlock extends Block {
             if(fluidstate.getFluidType() == Fluids.FLOWING_LAVA.getFluidType() & this.isCold) {
                 return true;
             }
-            if (state.canBeHydrated(pLevel, pPos, fluidstate, pPos.relative(direction)) & !this.isCold) {
+            if ((state.canBeHydrated(pLevel, pPos, fluidstate, pPos.relative(direction))) & !this.isCold) {
                 return true;
             }
         }
         return false;
     }
+
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {

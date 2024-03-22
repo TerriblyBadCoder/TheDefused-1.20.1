@@ -5,6 +5,7 @@ import net.atired.thedefused.DefusedMod;
 import net.atired.thedefused.block.custom.AshBlock;
 import net.atired.thedefused.block.custom.GazerBlock;
 import net.atired.thedefused.block.custom.ShaleBlock;
+import net.atired.thedefused.block.custom.ShaleSlabBlock;
 import net.atired.thedefused.item.Moditems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -32,6 +33,10 @@ public class ModBlocks {
             () -> new ShaleBlock(ModBlocks.SHALE,true, BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)));
     public static final RegistryObject<Block> SHALE = registerBlock("shale",
             () -> new ShaleBlock(ModBlocks.COLD_SHALE,false, BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)));
+    public static final RegistryObject<Block> COLD_SHALE_SLAB = registerBlock("cold_shale_slab",
+            () -> new ShaleSlabBlock(ModBlocks.SHALE_SLAB,true, BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)));
+    public static final RegistryObject<Block> SHALE_SLAB = registerBlock("shale_slab",
+            () -> new ShaleSlabBlock(ModBlocks.COLD_SHALE_SLAB,false, BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)));
 
 
 

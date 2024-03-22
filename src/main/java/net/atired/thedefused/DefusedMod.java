@@ -95,6 +95,8 @@ public class DefusedMod
             event.accept(ModBlocks.SHALE);
             event.accept(ModBlocks.COLD_SHALE);
             event.accept(ModBlocks.CHISELED_DARK_PRISMARINE);
+            event.accept(ModBlocks.SHALE_SLAB);
+            event.accept(ModBlocks.COLD_SHALE_SLAB);
         }
         if(event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS)
         {
