@@ -22,14 +22,14 @@ public class EnchantedBejeveledApple extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
-        System.out.println(pLevel);
+
         Object[] array = pLevel.getEntitiesOfClass(LivingEntity.class,
                 new AABB(pLivingEntity.getPosition(1).add(-7,-2,-7)
                         ,pLivingEntity.getPosition(1).add(7,2,7))).toArray();
 
         Vec3 pos;
         Vec3 diff;
-        if(array.length!=0)
+        if(array.length!=0 & array!=null)
 
             for(Object a : array)
             {

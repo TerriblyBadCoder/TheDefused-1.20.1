@@ -92,7 +92,6 @@ public class ShovelEnchants {
             Vec3 pos = event.getProjectile().getPosition(1);
             for(int i = 0; i < 2; i++)
             {
-                System.out.println("HEH");
                 event.getEntity().level().addParticle(ModParticles.COMBUSTION_PARTICLES.get(),pos.x+ (Math.random()-0.5)*2,pos.y+ (Math.random()-0.5)*2,pos.z+ (Math.random()-0.5)*2,0,0,0);
             }
             event.getProjectile().getPersistentData().putBoolean(TAG_COMBUSTIBLE,false);
@@ -114,24 +113,15 @@ public class ShovelEnchants {
         }
     }
     @SubscribeEvent
-    public void combustfy(LivingEntityUseItemEvent event) {
-        System.out.println(event.getItem().getUseDuration());
-    }
-    @SubscribeEvent
     public void combustfly(LivingEntityUseItemEvent.Stop event)
     {
-
-
         if(event.getItem().getEnchantmentLevel(ModEnchantments.COMBUST.get()) != 0 & event.getItem().getEnchantmentLevel(Enchantments.RIPTIDE) != 0)
         {
-
             Vec3 eyePosition = event.getEntity().getPosition(1);
             Vec3 viewPosition = event.getEntity().getViewVector(1);
             viewPosition = viewPosition.multiply(-1,-1,-1);
             if(event.getEntity().level().isClientSide())
             {
-
-
                 event.getEntity().level().addParticle(ModParticles.COMBUSTION_PARTICLES.get(),eyePosition.x,eyePosition.y,eyePosition.z,0,0,0);
                 for(int i = 0; i < 4; i++)
                 {

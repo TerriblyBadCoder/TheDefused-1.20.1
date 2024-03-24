@@ -18,7 +18,7 @@ public class BejeveledApple extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
-        System.out.println(pLevel);
+
         Object[] array = pLevel.getEntitiesOfClass(LivingEntity.class,
                 new AABB(pLivingEntity.getPosition(1).add(-5,-2,-5)
                         ,pLivingEntity.getPosition(1).add(5,2,5))).toArray();

@@ -8,6 +8,7 @@ import net.atired.thedefused.block.ModBlocks;
 import net.atired.thedefused.particle.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -63,7 +64,6 @@ public class ShaleBlock extends Block {
             Vec3 vecPos = pPos.getCenter();
             pLevel.addParticle(ModParticles.SHALE_PARTICLES.get(),vecPos.x+(Math.random()-0.5)*1.4F,vecPos.y+Math.random()-0.5,vecPos.z+(Math.random()-0.5)*1.4F,0,0.2,0);
         }
-
 
     }
     @Override
