@@ -4,6 +4,7 @@ import net.atired.thedefused.item.Moditems;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.commands.arguments.SlotArgument;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
@@ -19,10 +20,7 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
@@ -41,6 +39,8 @@ import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.items.SlotItemHandler;
+
+import java.util.Properties;
 
 
 public class CreeperLobotomyEvent {
@@ -94,6 +94,10 @@ public class CreeperLobotomyEvent {
                     if(!event.getEntity().isCreative())
                     {
                         Powder.setCount(Powder.getCount()-1);
+                        Powder = PotionUtils.setPotion(Powder,Potions.LUCK);
+                        PotionUtils.addPotionTooltip(Powder,Powder.getTooltipLines(event.getEntity(),new TooltipFlag.Default(false,false)),2.0F);
+                        System.out.println(PotionUtils.getPotion(Powder).getEffects());
+
                         event.getEntity().setItemInHand(InteractionHand.OFF_HAND,Powder);
                     }
                     hand = InteractionHand.OFF_HAND;

@@ -1,8 +1,12 @@
 package net.atired.thedefused.event;
 
 import com.mojang.blaze3d.shaders.Effect;
+import com.mojang.blaze3d.shaders.Shader;
 import net.atired.thedefused.effect.ModEffects;
 import net.atired.thedefused.item.Moditems;
+import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -32,6 +36,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.synth.PerlinNoise;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.EntitySpectatorShaderManager;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -259,9 +264,10 @@ public class ModDropsHandler {
 
             if(event.getOverlay().id().toString().equals("minecraft:player_health") & hasToxic == true)
             {
-
                 event.setCanceled(true);
+
             }
+
 
         }
 

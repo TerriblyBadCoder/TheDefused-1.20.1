@@ -1,6 +1,10 @@
 {
   "values": [
     "thedefused:chiseled_dark_prismarine",
-    "thedefused:gazer"
+    "thedefused:gazer",
+    "thedefused:shale",
+    "thedefused:cold_shale",
+    "thedefused:shale_slab",
+    "thedefused:cold_shale_slab"
     ]
 }

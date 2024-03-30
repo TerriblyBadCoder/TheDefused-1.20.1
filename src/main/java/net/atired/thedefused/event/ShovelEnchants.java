@@ -4,6 +4,7 @@ import net.atired.thedefused.enchantment.ModEnchantments;
 import net.atired.thedefused.particle.ModParticles;
 import net.atired.thedefused.particle.custom.CombustionParticles;
 import net.minecraft.client.particle.*;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -14,19 +15,18 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.entity.projectile.ThrownTrident;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.world.item.TridentItem;
+import net.minecraft.world.entity.projectile.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.TntBlock;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -86,7 +86,6 @@ public class ShovelEnchants {
     @SubscribeEvent
     public void combusthit(ProjectileImpactEvent event)
     {
-        System.out.println(event.getProjectile().level());
         if(event.getProjectile().getPersistentData().getBoolean(TAG_COMBUSTIBLE) & event.getProjectile().level().isClientSide())
         {
             Vec3 pos = event.getProjectile().getPosition(1);
@@ -96,7 +95,6 @@ public class ShovelEnchants {
             }
             event.getProjectile().getPersistentData().putBoolean(TAG_COMBUSTIBLE,false);
         }
-
         if(event.getProjectile().getPersistentData().getBoolean(TAG_COMBUSTIBLE) & !event.getProjectile().level().isClientSide())
         {
             Boolean bool = false;
@@ -108,6 +106,40 @@ public class ShovelEnchants {
             Vec3 pPos = event.getRayTraceResult().getLocation();
             pLevel.explode(projectile.getOwner(),pLevel.damageSources().lightningBolt(),new ExplosionDamageCalculator(),pPos.x,pPos.y,pPos.z,
                     (float)0.7,bool, Level.ExplosionInteraction.NONE);
+        }
+        if(event.getProjectile() instanceof  ThrownPotion)
+        {
+            ThrownPotion thrownPotion = (ThrownPotion) event.getProjectile();
+            int e = 4;
+
+            if(thrownPotion.getItem().is(Items.LINGERING_POTION))
+            {
+                e=12;
+            }
+
+                Potion yeah = PotionUtils.getPotion(thrownPotion.getItem());
+                AABB aabb = new AABB(event.getRayTraceResult().getLocation().add(e/-2,e/-4,e/-2),event.getRayTraceResult().getLocation().add(e/2,e/4,e/2));
+                 for(Object a : event.getProjectile().level().getEntitiesOfClass(ItemEntity.class,aabb).toArray())
+                 {
+                     if(!event.getProjectile().level().isClientSide())
+                     {
+                         ItemEntity itemEntity = (ItemEntity) a;
+                         if(itemEntity.getItem().getItem() instanceof SwordItem)
+                         {
+
+                             ItemStack itemStack = itemEntity.getItem();
+
+                             CompoundTag compound = new CompoundTag();
+                             compound.putInt("potioncharges",6);
+                             System.out.println(compound.getInt("potioncharges"));
+                             itemStack.addTagElement("potioncharges",compound.get("potioncharges"));
+
+                             itemStack = PotionUtils.setPotion(itemStack,yeah);
+
+                             itemEntity.setItem(itemStack);
+                         }
+                     }
+                 }
 
 
         }
@@ -120,6 +152,7 @@ public class ShovelEnchants {
             Vec3 eyePosition = event.getEntity().getPosition(1);
             Vec3 viewPosition = event.getEntity().getViewVector(1);
             viewPosition = viewPosition.multiply(-1,-1,-1);
+
             if(event.getEntity().level().isClientSide())
             {
                 event.getEntity().level().addParticle(ModParticles.COMBUSTION_PARTICLES.get(),eyePosition.x,eyePosition.y,eyePosition.z,0,0,0);

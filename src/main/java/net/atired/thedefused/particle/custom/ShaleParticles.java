@@ -33,7 +33,7 @@ public class ShaleParticles extends TextureSheetParticle {
 
     @Override
     public void tick() {
-        System.out.println(this.roll);
+
         super.tick();
         this.setSpriteFromAge(this.sprites);
         this.oRoll = this.roll;

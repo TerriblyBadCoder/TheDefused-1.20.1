@@ -3,13 +3,12 @@ package net.atired.thedefused.block.custom;
 import net.atired.thedefused.item.Moditems;
 import net.atired.thedefused.particle.ModParticles;
 import net.atired.thedefused.particle.custom.VolatileParticle;
-import net.minecraft.client.particle.GlowParticle;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.SpriteSet;
+import net.atired.thedefused.particletypes.AnotherDustParticleOptions;
+import net.minecraft.client.particle.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
@@ -42,6 +41,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -118,7 +118,8 @@ public class AshBlock extends Block {
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
         if(this.getCharge(pState) > 0)
         {
-            for(int i = 0; i <this.getCharge(pState)/4+1; i++)
+
+            for(int i = 0; i <this.getCharge(pState)/2+10; i++)
 
                 pLevel.addParticle(ParticleTypes.ELECTRIC_SPARK, pPos.getX() + Math.random()*1.2, pPos.getY() + Math.random()*1.2, pPos.getZ() + Math.random()*1.2, 0.0, 0.0, 0.0);
         }

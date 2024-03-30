@@ -33,7 +33,7 @@ public class ShieldItemMixin {
 
     
     @Inject(method = "use", at = @At(value = "HEAD"), cancellable = true)
-    private InteractionResultHolder<ItemStack> chargeNtarge(Level pLevel, Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<Boolean> cir)
+    private void chargeNtarge(Level pLevel, Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<Boolean> cir)
     {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if(!pPlayer.getCooldowns().isOnCooldown(itemstack.getItem()) & itemstack.getEnchantmentLevel(ModEnchantments.TACKLER.get()) != 0)
@@ -83,6 +83,6 @@ public class ShieldItemMixin {
         }
 
 
-        return InteractionResultHolder.consume(itemstack);
+
     }
 }
