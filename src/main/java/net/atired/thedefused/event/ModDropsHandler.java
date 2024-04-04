@@ -4,6 +4,7 @@ import com.mojang.blaze3d.shaders.Effect;
 import com.mojang.blaze3d.shaders.Shader;
 import net.atired.thedefused.effect.ModEffects;
 import net.atired.thedefused.item.Moditems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
@@ -262,7 +263,7 @@ public class ModDropsHandler {
         public void renderthing(RenderGuiOverlayEvent.Pre event)
         {
 
-            if(event.getOverlay().id().toString().equals("minecraft:player_health") & hasToxic == true)
+            if(event.getOverlay().id().toString().equals("minecraft:player_health") & Minecraft.getInstance().player.hasEffect(ModEffects.TOXIC.get()))
             {
                 event.setCanceled(true);
 

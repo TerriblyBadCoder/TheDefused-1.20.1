@@ -33,9 +33,9 @@ public class BejeveledApple extends Item {
                 diff = pos.subtract(pLivingEntity.getPosition(1)).normalize();
                 if(((LivingEntity)a) != pLivingEntity)
                 {
-                    ((LivingEntity)a).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,80,4));
-                    ((LivingEntity)a).addEffect(new MobEffectInstance(MobEffects.BLINDNESS,70,0));
-                    ((LivingEntity)a).setDeltaMovement(diff.x,diff.y + 0.5,diff.z + 0.5);
+                    ((LivingEntity)a).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,80,2));
+
+                    ((LivingEntity)a).addDeltaMovement(new Vec3(diff.x,diff.y + 0.5,diff.z + 0.5));
                     if(pLevel.isClientSide() ) {
                         for (int i = 0; i < 5; i++)
                             pLevel.addParticle(ParticleTypes.SMOKE, pos.x + Math.random() - 0.5, pos.y + Math.random() - 0.5, pos.z + Math.random() - 0.5,(Math.random() - 0.5)/4 , 0.1, (Math.random() - 0.5)/4);
