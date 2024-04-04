@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "key": {
+    "#": {
+      "item": "thedefused:shale"
+    }
+
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "item": "thedefused:shale_slab"
+  },
+  "show_notification": true
+}

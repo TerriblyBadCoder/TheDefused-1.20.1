@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "key": {
+    "#": {
+      "item": "thedefused:cold_shale"
+    }
+
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "item": "thedefused:cold_shale_slab"
+  },
+  "show_notification": true
+}

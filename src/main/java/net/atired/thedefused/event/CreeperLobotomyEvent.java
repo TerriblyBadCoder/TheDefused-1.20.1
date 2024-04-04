@@ -5,6 +5,8 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.commands.arguments.SlotArgument;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
@@ -159,7 +161,7 @@ public class CreeperLobotomyEvent {
     @SubscribeEvent
     public void Exploding(LivingDeathEvent event)
     {
-        if(event.getSource().getDirectEntity() != null)
+
         if(event.getSource().getDirectEntity().getType() == EntityType.CREEPER
                 && !event.getSource().getDirectEntity().level().isClientSide())
         {
@@ -176,8 +178,8 @@ public class CreeperLobotomyEvent {
     @SubscribeEvent
     public void CreeperTick(LivingEvent.LivingTickEvent event)
     {
-        if(event.getEntity().getTags() != null)
-        if(event.getEntity().getType() == EntityType.CREEPER & event.getEntity().getTags().contains("defused_thedefused_mod"))
+
+        if(event.getEntity().getType() == EntityType.CREEPER & event.getEntity().getPersistentData().getInt("thedefused_isdefused") == 1)
         {
             if(((Creeper)event.getEntity()).getSwellDir() != -1)
                 ((Creeper)event.getEntity()).setSwellDir(-1);
@@ -208,12 +210,13 @@ public class CreeperLobotomyEvent {
           Vec3 OffsetEyes = Eyes.yRot(-45).cross(Eyes.yRot(45));
           OffsetEyes = Eyes.cross(OffsetEyes);
           OffsetEyes = OffsetEyes.multiply(offset,offset,offset);
-          System.out.println(interacter.getScale() + "  " + OffsetEyes + "  " + Eyes.cross(OffsetEyes));
+
           Positun = Positun.add(new Vec3(0,interacter.getEyeHeight()/1.6,0));
           Positun = Positun.add(OffsetEyes);
           for(int i = 0; i < 5; i++)
-          event.getLevel().addParticle(ParticleTypes.SMOKE, Positun.x,Positun.y,Positun.z,
+             event.getLevel().addParticle(ParticleTypes.SMOKE, Positun.x,Positun.y+0.2,Positun.z,
                   Eyes.x/6 + (Math.random()-0.5)/12, Eyes.y/6 + (Math.random()-0.5)/12,Eyes.z/6 + (Math.random()-0.5)/12 );
+          interacter.level().playSound((Player) null, Positun.x,Positun.y,Positun.z, SoundEvents.HONEY_DRINK, SoundSource.BLOCKS,0.5F,0.3F);
           interacter.swing(hand);
           if(!event.getLevel().isClientSide())
           {
@@ -227,8 +230,8 @@ public class CreeperLobotomyEvent {
     @SubscribeEvent
     public void CreepInit(EntityJoinLevelEvent event)
     {
-        if(event.getEntity().getTags() != null)
-        if(event.getEntity().getType() == EntityType.CREEPER & event.getEntity().getTags().contains("defused_thedefused_mod"))
+
+        if(event.getEntity().getType() == EntityType.CREEPER & event.getEntity().getPersistentData().getInt("thedefused_isdefused") == 1)
         {
 
             Creeper creep = (Creeper) event.getEntity();
@@ -240,12 +243,11 @@ public class CreeperLobotomyEvent {
     @SubscribeEvent
     public void CreepDamaged(LivingAttackEvent event)
     {
-        if(event.getEntity().getTags() != null)
-        if(event.getEntity().getType() == EntityType.CREEPER & event.getEntity().getTags().contains("defused_thedefused_mod"))
+
+        if(event.getEntity().getType() == EntityType.CREEPER & event.getEntity().getPersistentData().getInt("thedefused_isdefused") == 1)
         {
 
             Creeper creep = (Creeper) event.getEntity();
-
             creep.setTarget((LivingEntity) null);
             creep.setSwellDir(-40);
             Creeper_Lobotomy(event,creep);
@@ -256,7 +258,7 @@ public class CreeperLobotomyEvent {
     static void Creeper_Lobotomy(Event event, Creeper creep)
     {
         creep.setTarget((LivingEntity) null);
-        creep.getPersistentData().putInt("Yeah", 1);
+        creep.getPersistentData().putInt("thedefused_isdefused", 1);
         creep.setSwellDir(-60);
         for(Object a : creep.goalSelector.getAvailableGoals().toArray())
         {
