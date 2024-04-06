@@ -116,6 +116,7 @@ public class DefusedMod
         {
             event.accept(ModBlocks.ASH_CUBE);
             event.accept(Moditems.WARPEDEFFIGY);
+            event.accept(Moditems.NEEDLETICK);
 
         }
         if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES)

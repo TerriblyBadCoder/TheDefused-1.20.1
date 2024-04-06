@@ -21,5 +21,7 @@ public class ModEventBusEvents {
         event.registerSpriteSet(ModParticles.BASH_PARTICLES.get(), BashParticles.Provider::new);
         event.registerSpriteSet(ModParticles.VOLATILE_PARTICLES.get(), VolatileParticle.Provider::new);
         event.registerSpriteSet(ModParticles.SKULL_PARTICLES.get(), SkullParticles.Provider::new);
+        event.registerSpriteSet(ModParticles.VOID_PARTICLES.get(), VoidParticles.Provider::new);
+        event.registerSpriteSet(ModParticles.COLLAPSE_PARTICLES.get(), CollapseParticles.Provider::new);
     }
 }

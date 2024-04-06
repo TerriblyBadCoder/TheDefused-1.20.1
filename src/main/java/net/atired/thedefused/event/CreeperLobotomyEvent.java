@@ -161,7 +161,7 @@ public class CreeperLobotomyEvent {
     @SubscribeEvent
     public void Exploding(LivingDeathEvent event)
     {
-
+        if(event.getSource().getDirectEntity()!=null)
         if(event.getSource().getDirectEntity().getType() == EntityType.CREEPER
                 && !event.getSource().getDirectEntity().level().isClientSide())
         {

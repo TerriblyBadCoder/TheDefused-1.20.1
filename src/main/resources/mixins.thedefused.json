@@ -8,7 +8,10 @@
   "mixins": [
     "ShieldItemMixin",
     "ItemMixin",
-    "SwordItemMixin"
+    "SwordItemMixin",
+    "DroppedItemMixin",
+    "LivingEntityMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1

@@ -34,7 +34,6 @@ public class BejeveledApple extends Item {
                 if(((LivingEntity)a) != pLivingEntity)
                 {
                     ((LivingEntity)a).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,80,2));
-
                     ((LivingEntity)a).addDeltaMovement(new Vec3(diff.x,diff.y + 0.5,diff.z + 0.5));
                     if(pLevel.isClientSide() ) {
                         for (int i = 0; i < 5; i++)

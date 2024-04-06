@@ -232,7 +232,9 @@ public class ModDropsHandler {
                     else if (ItemGotten == Items.ENCHANTED_GOLDEN_APPLE) {
                         ItemGotten = Moditems.ENCHANTEDBEJEVELEDFRUIT.get();
                     }
-
+                    else if (ItemGotten == Items.IRON_SWORD) {
+                        ItemGotten = Moditems.NEEDLETICK.get();
+                    }
 
 
                     ItemEntity eheh = new ItemEntity(event.getLevel(), EventEntity.getX(),-50,EventEntity.getZ(),
