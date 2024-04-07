@@ -3,12 +3,14 @@ package net.atired.thedefused.event;
 import net.atired.thedefused.enchantment.ModEnchantments;
 import net.atired.thedefused.particle.ModParticles;
 import net.atired.thedefused.particle.custom.CombustionParticles;
+import net.atired.thedefused.particletypes.AnotherDustParticleOptions;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
@@ -31,11 +33,13 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingGetProjectileEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.joml.Vector3f;
 
 public class ShovelEnchants {
     private static final String TAG_COMBUSTIBLE = "thedefused:trident_combusts";
@@ -163,6 +167,51 @@ public class ShovelEnchants {
             }
             viewPosition = viewPosition.multiply(0.8,0.4,0.8);
             event.getEntity().setDeltaMovement(event.getEntity().getDeltaMovement().add(viewPosition.x,viewPosition.y+0.2,viewPosition.z));
+        }
+    }
+    public void itemStab(LivingAttackEvent event)
+    {
+        ItemStack pItem = ((Player)event.getSource().getDirectEntity()).getMainHandItem();
+        System.out.println(pItem);
+        if(PotionUtils.getPotion(pItem) != Potions.EMPTY)
+        {
+
+
+            CompoundTag compound = new CompoundTag();
+            Integer charges = ((CompoundTag)pItem.serializeNBT().get("tag")).getInt("potioncharges");
+            int color = PotionUtils.getColor(pItem);
+            int r = (color >> 16) & 0xff;
+            int g = (color >> 8) & 0xff;
+            int b = color & 0xff;
+            Vec3 vec3 = new Vec3(r,g,b);
+            vec3 = vec3.normalize();
+
+            Vec3 pos = event.getEntity().getPosition(0);
+            if(event.getEntity().level() instanceof ServerLevel serverLevel)
+            {
+                AABB box = event.getEntity().getBoundingBox();
+
+                serverLevel.sendParticles((new AnotherDustParticleOptions(new Vector3f((float)vec3.x,(float)vec3.y,(float)vec3.z), ((float) box.getSize())*2F)),pos.x,pos.y + (box.maxY - box.minY)/2+0.1F,pos.z,1,0,0,0,0);
+            }
+            compound.putInt("potioncharges",charges-1);
+            ((Player)event.getSource().getDirectEntity()).getMainHandItem().addTagElement("potioncharges",compound.get("potioncharges"));
+            if(!PotionUtils.getPotion(((Player)event.getSource().getDirectEntity()).getMainHandItem()).hasInstantEffects())
+            {
+                MobEffectInstance mobEffectInstance = new MobEffectInstance(PotionUtils.getPotion(((Player)event.getSource().getDirectEntity()).getMainHandItem()).getEffects().get(0).getEffect(),PotionUtils.getPotion(((Player)event.getSource().getDirectEntity()).getMainHandItem()).getEffects().get(0).getDuration()/5,PotionUtils.getPotion(((Player)event.getSource().getDirectEntity()).getMainHandItem()).getEffects().get(0).getAmplifier());
+                event.getEntity().addEffect(mobEffectInstance);
+            }
+            else
+            {
+                MobEffectInstance mobEffectInstance = new MobEffectInstance(PotionUtils.getPotion(((Player)event.getSource().getDirectEntity()).getMainHandItem()).getEffects().get(0).getEffect(), 1,PotionUtils.getPotion(((Player)event.getSource().getDirectEntity()).getMainHandItem()).getEffects().get(0).getAmplifier());
+                event.getEntity().addEffect(mobEffectInstance);
+            }
+            if(charges <=1)
+            {
+                ((Player)event.getSource().getDirectEntity()).getMainHandItem().removeTagKey("potioncharges");
+                 pItem = PotionUtils.setPotion(((Player)event.getSource().getDirectEntity()).getMainHandItem(),Potions.EMPTY);
+
+            }
+
         }
     }
 }

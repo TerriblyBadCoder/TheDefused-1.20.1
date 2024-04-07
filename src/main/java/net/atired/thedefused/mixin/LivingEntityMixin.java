@@ -57,11 +57,11 @@ public abstract class LivingEntityMixin extends Entity{
                 this.getPersistentData().putFloat("thedefused:collapse",0);
                 if(lastHurtByPlayer != null)
                 {
-                    System.out.println("Eh");
+
                     hurt(this.damageSources().playerAttack(lastHurtByPlayer),hurtinger);
                 }
                 else if (lastHurtByMob != null) {
-                    System.out.println("Eh");
+
                     hurt(this.damageSources().mobAttack(lastHurtByMob),hurtinger);
                 }
                 else

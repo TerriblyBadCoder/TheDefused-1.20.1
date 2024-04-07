@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -23,27 +23,35 @@ import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.client.model.DynamicFluidContainerModel;
 import net.minecraftforge.eventbus.api.Event;
+import org.checkerframework.common.reflection.qual.GetClass;
 import org.jline.utils.Colors;
 import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mixins;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.awt.*;
+import java.lang.reflect.Method;
 import java.util.List;
 
-@Mixin(SwordItem.class)
-public class SwordItemMixin {
+@Mixin(Player.class)
+public abstract class SwordItemMixin extends LivingEntity{
 
-    @Inject(method = "hurtEnemy", at = @At(value = "TAIL"), cancellable = true)
-    public void givePot(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker, CallbackInfoReturnable<Boolean> cir)
+
+    protected SwordItemMixin(EntityType<? extends LivingEntity> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+    }
+
+    @Inject(method = "attack", at = @At(value = "TAIL"), cancellable = true)
+    public void givePot(Entity Target, CallbackInfo ci)
     {
-        if(PotionUtils.getPotion(pStack) != Potions.EMPTY)
+        ItemStack pStack = this.getMainHandItem();
+        if(Target instanceof LivingEntity pTarget)
+            if(PotionUtils.getPotion(pStack) != Potions.EMPTY)
         {
-
-
             CompoundTag compound = new CompoundTag();
             Integer charges = ((CompoundTag)pStack.serializeNBT().get("tag")).getInt("potioncharges");
             int color = PotionUtils.getColor(pStack);
@@ -82,6 +90,7 @@ public class SwordItemMixin {
         }
 
     }
-    
+
+
 
 }
